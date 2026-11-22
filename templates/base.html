@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block titulo %}Encargo 3 - Diseño Web{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/estilos.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Encargo 3 - Aplicación Flask</h1>
+    </header>
+    <main>
+        {% block contenido %}{% endblock %}
+    </main>
+    <footer>
+        <p>Nicolás Seguel - Diseño Web - Unidad 3</p>
+    </footer>
+</body>
+</html>

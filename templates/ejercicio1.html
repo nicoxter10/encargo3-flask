@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block titulo %}Ejercicio 1{% endblock %}
+{% block contenido %}
+<h2>Ejercicio 1: Promedio y estado del estudiante</h2>
+<form method="POST" action="{{ url_for('ejercicio1') }}">
+    <label for="nota1">Nota 1 (10 a 70):</label>
+    <input type="number" id="nota1" name="nota1" step="0.1" min="10" max="70" required>
+    <label for="nota2">Nota 2 (10 a 70):</label>
+    <input type="number" id="nota2" name="nota2" step="0.1" min="10" max="70" required>
+    <label for="nota3">Nota 3 (10 a 70):</label>
+    <input type="number" id="nota3" name="nota3" step="0.1" min="10" max="70" required>
+    <label for="asistencia">Asistencia (0 a 100):</label>
+    <input type="number" id="asistencia" name="asistencia" step="0.1" min="0" max="100" required>
+    <button type="submit">Enviar</button>
+</form>
+
+{% if promedio is not none %}
+<div class="resultado">
+    <h3>Resultados</h3>
+    <p>Promedio de las 3 notas: <strong>{{ promedio }}</strong></p>
+    <p>Estado del estudiante:
+        <strong class="{{ 'aprobado' if estado == 'Aprobado' else 'reprobado' }}">{{ estado }}</strong>
+    </p>
+</div>
+{% endif %}
+
+{% if historial %}
+<h3>Registros almacenados en memoria</h3>
+<table>
+    <tr><th>N°</th><th>Notas</th><th>Asistencia</th><th>Promedio</th><th>Estado</th><th>Ver</th></tr>
+    {% for reg in historial %}
+    <tr>
+        <td>{{ loop.index0 }}</td>
+        <td>{{ reg.notas }}</td>
+        <td>{{ reg.asistencia }}%</td>
+        <td>{{ reg.promedio }}</td>
+        <td>{{ reg.estado }}</td>
+        <td><a href="{{ url_for('ejercicio1', indice=loop.index0) }}">Ver</a></td>
+    </tr>
+    {% endfor %}
+</table>
+{% endif %}
+<p><a href="{{ url_for('index') }}">Volver al menú</a></p>
+{% endblock %}
